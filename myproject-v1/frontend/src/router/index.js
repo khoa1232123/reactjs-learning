@@ -1,7 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Layout } from '../components';
-import { Abouts, Home, ProductDetails, Shop } from '../containers';
+import { Layout, LayoutAdmin } from '../components';
+import {
+  Abouts,
+  AdminEmpty,
+  CategoryAdmin,
+  Dashboard,
+  Home,
+  ProductDetails,
+  Shop,
+} from '../containers';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -9,6 +17,15 @@ export default () => {
     <Router>
       <Switch>
         {/* frontend layout normal */}
+        <Route path="/admin/:path?" exact>
+          <LayoutAdmin>
+            <Switch>
+              <Route path="/admin" exact component={Dashboard} />
+              <Route path="/admin/categories" exact component={CategoryAdmin} />
+              <Route path="/admin/*" exact component={AdminEmpty} />
+            </Switch>
+          </LayoutAdmin>
+        </Route>
         <Route>
           <Layout>
             <Switch>

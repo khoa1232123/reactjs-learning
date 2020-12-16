@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, getProductById } from '../../redux/actions';
+import { addToCart, getProductById } from '../../../redux/actions';
 
 const ProductDetails = (props) => {
   const [numProduct, setNumProduct] = useState(1);

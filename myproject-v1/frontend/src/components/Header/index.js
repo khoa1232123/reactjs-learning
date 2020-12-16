@@ -19,7 +19,7 @@ const Header = () => {
       </Navbar>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Link to="/" className="navbar-brand">
+          <Link to="/" className="navbar-brand ml-2">
             MyProject v1
           </Link>
           <Search />

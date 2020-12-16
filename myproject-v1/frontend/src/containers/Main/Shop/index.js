@@ -1,15 +1,16 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-
-import data from '../../data';
-import { ProductItem } from '../../components';
+import data from '../../../data';
+import { ProductItem } from '../../../components';
 
 const Shop = () => {
   const { products } = data;
   return (
     <>
       <Row>
-        <h2>Shop</h2>
+        <Col>
+          <h2>Shop</h2>
+        </Col>
       </Row>
       <Row>
         <Col xs={3}>Sidebar</Col>

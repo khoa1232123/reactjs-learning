@@ -1,5 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
-
+@import './scss/sb-admin-2.scss';
+.cursor-pointer {
+  cursor: pointer;
+}
 body {
   min-height: 100vh;
 }
@@ -11,7 +14,7 @@ body {
   justify-content: space-between;
 }
 
-div[class*='col'],
+div[class*='col-'],
 .container,
 .container-fluid {
   padding-left: 8px;

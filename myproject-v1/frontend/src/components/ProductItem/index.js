@@ -6,7 +6,9 @@ const ProductItem = ({ product }) => {
   return (
     <Card className="mb-3">
       {product.priceSale && <div className="onsale">Sale!</div>}
-      <Card.Img variant="top" src={product.image} />
+      <Link to={`/product/${product._id}`}>
+        <Card.Img variant="top" src={product.image} />
+      </Link>
       <Card.Body>
         <Card.Title>
           <Link to={`/product/${product._id}`}>{product.name}</Link>
