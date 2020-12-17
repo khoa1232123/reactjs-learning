@@ -6,6 +6,7 @@ const cors = require('cors');
 
 // routes
 const productRoutes = require('./routes/product');
+const categoryRoutes = require('./routes/category');
 
 // environment variable or you can say constants
 env.config();
@@ -26,6 +27,7 @@ mongoose
 app.use(cors());
 app.use(express.json());
 app.use('/api/product', productRoutes);
+app.use('/api/category', categoryRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);

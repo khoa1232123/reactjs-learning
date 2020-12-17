@@ -6,44 +6,6 @@ const initState = {
   error: null,
 };
 
-const buildNewCategories = (parentId, categories, category) => {
-  let myCategories = [];
-  for (let cat of categories) {
-    if (cat._id === parentId) {
-      myCategories.push({
-        ...cat,
-        children:
-          cat.children && cat.children.length > 0
-            ? buildNewCategories(
-                parentId,
-                [
-                  ...cat.children,
-                  {
-                    _id: category._id,
-                    name: category.name,
-                    slug: category.slug,
-                    parentId: category.parentId,
-                    children: category.children,
-                  },
-                ],
-                category
-              )
-            : [],
-      });
-    } else {
-      myCategories.push({
-        ...cat,
-        children:
-          cat.children && cat.children.length > 0
-            ? // eslint-disable-next-line no-unused-vars
-              buildNewCategories(parentId, cat.children, category)
-            : [],
-      });
-    }
-  }
-  return myCategories;
-};
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initState, action) => {
   switch (action.type) {

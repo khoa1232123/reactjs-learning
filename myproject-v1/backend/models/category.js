@@ -12,12 +12,12 @@ const categorySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    type: {
+    description: {
       type: String,
     },
-    categoryImage: {
-      type: String,
-    },
+    // categoryImage: {
+    //   type: String,
+    // },
     parentId: {
       type: String,
     },

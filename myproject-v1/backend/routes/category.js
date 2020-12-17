@@ -25,9 +25,9 @@ const upload = multer({ storage });
 
 router.post(
   '/create',
-  requireSignin,
-  adminMiddleware,
-  upload.single('categoryImage'),
+  // requireSignin,
+  // adminMiddleware,
+  // upload.single('categoryImage'),
   createCategory
 );
 router.get('/getcategories', getCategories);
