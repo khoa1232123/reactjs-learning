@@ -4,8 +4,8 @@ const router = express.Router();
 const {
   createCategory,
   getCategories,
-  updateCategories,
-  deleteCategories,
+  updateCategory,
+  deleteCategory,
 } = require('../controller/category');
 
 const multer = require('multer');
@@ -31,7 +31,7 @@ router.post(
   createCategory
 );
 router.get('/getcategories', getCategories);
-router.post('/update', upload.array('categoryImage'), updateCategories);
-router.post('/delete', deleteCategories);
+router.post('/update', updateCategory);
+router.post('/delete', deleteCategory);
 
 module.exports = router;

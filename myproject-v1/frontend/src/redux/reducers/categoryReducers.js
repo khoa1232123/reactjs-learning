@@ -1,14 +1,14 @@
 import { categoryTypes } from '../types';
 
-const initState = {
+const initialState = {
   categories: [],
   loading: false,
   error: null,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initState, action) => {
-  switch (action.type) {
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
     case categoryTypes.GET_ALL_CATEGORIES_REQUEST:
       return {
         ...state,
@@ -17,13 +17,13 @@ export default (state = initState, action) => {
     case categoryTypes.GET_ALL_CATEGORIES_SUCCESS:
       return {
         ...state,
-        categories: action.payload.categories,
+        categories: payload.categories,
         loading: false,
       };
     case categoryTypes.GET_ALL_CATEGORIES_FAILURE:
       return {
         ...state,
-        error: action.payload.error,
+        error: payload.error,
       };
     case categoryTypes.ADD_NEW_CATEGORY_REQUEST:
       return {
@@ -31,22 +31,29 @@ export default (state = initState, action) => {
         loading: true,
       };
     case categoryTypes.ADD_NEW_CATEGORY_SUCCESS:
-      // const category = action.payload.category;
-      // const updateCat = buildNewCategories(
-      //   category.parentId,
-      //   state.categories,
-      //   category
-      // );
-      // console.log(updateCat);
       return {
         ...state,
-        // categories: updateCat,
         loading: false,
       };
     case categoryTypes.ADD_NEW_CATEGORY_FAILURE:
       return {
         ...state,
-        error: action.payload.error,
+        error: payload.error,
+      };
+    case categoryTypes.DELETE_CATEGORY_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case categoryTypes.DELETE_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case categoryTypes.DELETE_CATEGORY_FAILURE:
+      return {
+        ...state,
+        error: payload.error,
       };
     default:
       return state;
