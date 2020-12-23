@@ -7,6 +7,7 @@ import {
   CategoryAdmin,
   Dashboard,
   Home,
+  Login,
   ProductDetails,
   Shop,
 } from '../containers';
@@ -17,6 +18,7 @@ export default () => {
     <Router>
       <Switch>
         {/* frontend layout normal */}
+        <Route path="/login" component={Login} />
         <Route path="/admin/:path?" exact>
           <LayoutAdmin>
             <Switch>

@@ -8,3 +8,5 @@ export { default as ProductDetails } from './Main/ProductDetails';
 export { default as Dashboard } from './Admin/Dashboard';
 export { default as CategoryAdmin } from './Admin/CategoryAdmin';
 export { default as AdminEmpty } from './Admin/AdminEmpty';
+
+export { default as Login } from './Admin/Login';

@@ -1,4 +1,11 @@
 import axios from '../../helpers/axios';
+import {
+  getLoggedIn,
+  getToken,
+  resetLocalStorage,
+  setLoggedIn,
+  setToken,
+} from '../../helps/localStorage';
 import { authTypes, cartTypes } from '../types';
 
 export const login = (user) => {
@@ -6,14 +13,14 @@ export const login = (user) => {
     dispatch({
       type: authTypes.LOGIN_REQUEST,
     });
-    const res = await axios.post(`/user/signin`, {
+    const res = await axios.post('/auth/signin', {
       ...user,
     });
     console.log(res);
     if (res.status === 200) {
       const { token, user } = res.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      setToken(token);
+      setLoggedIn(user);
       dispatch({
         type: authTypes.LOGIN_SUCCESS,
         payload: { token, user },
@@ -33,9 +40,9 @@ export const login = (user) => {
 
 export const isUserLoggedIn = () => {
   return async (dispatch) => {
-    const token = localStorage.getItem('token');
+    const token = getToken();
     if (token) {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = getLoggedIn();
       dispatch({
         type: authTypes.LOGIN_SUCCESS,
         payload: { token, user },
@@ -52,12 +59,10 @@ export const isUserLoggedIn = () => {
 };
 
 export const signout = () => {
-  return async (dispatch) => {
-    dispatch({ type: authTypes.LOGOUT_REQUEST });
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.clear();
+  return (dispatch) => {
     console.log('abc signout');
+    dispatch({ type: authTypes.LOGOUT_REQUEST });
+    resetLocalStorage();
     dispatch({
       type: authTypes.LOGOUT_SUCCESS,
     });

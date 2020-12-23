@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Navbar } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { isUserLoggedIn, signout } from '../../redux/actions';
 import Menu from './Menu';
 import Search from './Search';
 
 const Header = () => {
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!auth.authenticate) {
+      dispatch(isUserLoggedIn());
+    }
+  });
+
+  const signOut = (e) => {
+    e.preventDefault();
+    dispatch(signout());
+  };
+
   return (
     <header>
       <Navbar>
@@ -12,8 +28,22 @@ const Header = () => {
           <div className="w-100 d-flex">
             <Col xs={6}>my phone number: 0987654321</Col>
             <Col xs={6} className="text-right">
-              <span className="mr-3">SignIn</span>
-              <Link to="/admin">Admin</Link>
+              {auth.authenticate ? (
+                <>
+                  {auth.user.role === 'admin' ? (
+                    <Link to="/admin">Admin</Link>
+                  ) : (
+                    ''
+                  )}
+                  <a href="/" className="ml-3" onClick={(e) => signOut(e)}>
+                    Logout
+                  </a>
+                </>
+              ) : (
+                <Link to="/login" className="ml-3">
+                  SignIn
+                </Link>
+              )}
             </Col>
           </div>
         </Container>
