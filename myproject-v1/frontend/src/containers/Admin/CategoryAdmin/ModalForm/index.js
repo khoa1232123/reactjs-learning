@@ -11,12 +11,12 @@ import {
 const ModalForm = ({ show, setShow, updateCatId = '' }) => {
   const category = useSelector((state) => state.category);
   const { categories } = category;
-  console.log(categories);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [parentId, setParentId] = useState('');
   const [catList, setCatList] = useState([]);
   const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (updateCatId) {

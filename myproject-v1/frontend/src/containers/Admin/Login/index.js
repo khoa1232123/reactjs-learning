@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { isUserLoggedIn, login } from '../../../redux/actions';
 
 const Login = () => {
@@ -112,6 +112,11 @@ const Login = () => {
                       <a className="small" href="register.html">
                         Create an Account!
                       </a>
+                    </div>
+                    <div className="text-center mt-3">
+                      <Link to="/">
+                        <i className="fas fa-long-arrow-alt-left"></i> Go back
+                      </Link>
                     </div>
                   </div>
                 </div>

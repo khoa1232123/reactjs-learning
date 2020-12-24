@@ -21,8 +21,6 @@ const CategoryAdmin = () => {
     }
   }, [category]);
 
-  console.log(catList);
-
   const editCate = (id) => {
     setUpdateCatId(id);
     setShow(true);

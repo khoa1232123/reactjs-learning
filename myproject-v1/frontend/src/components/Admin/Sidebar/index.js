@@ -9,7 +9,7 @@ const Sidebar = () => {
     >
       <a
         className="sidebar-brand d-flex align-items-center justify-content-center"
-        href="index.html"
+        href="/admin"
       >
         <div className="sidebar-brand-icon rotate-n-15">
           <i className="fas fa-laugh-wink"></i>
@@ -19,16 +19,27 @@ const Sidebar = () => {
         </div>
       </a>
 
-      <hr className="sidebar-divider my-0" />
-
       <li className="nav-item">
-        <Link to="/admin" className="nav-link">
+        <Link to="/" className="nav-link">
+          <i className="fas fa-fw fa-tachometer-alt"></i>
+          <span>Frontend</span>
+        </Link>
+      </li>
+      <hr className="sidebar-divider my-0" />
+      <li className="nav-item">
+        <Link to="/admin" className="nav-link pb-0">
           <i className="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </Link>
       </li>
       <li className="nav-item">
-        <Link to="/admin/categories" className="nav-link">
+        <Link to="/admin/products" className="nav-link pb-0">
+          <i className="fas fa-fw fa-tachometer-alt"></i>
+          <span>Products</span>
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/admin/categories" className="nav-link pb-0">
           <i className="fas fa-fw fa-tachometer-alt"></i>
           <span>Categories</span>
         </Link>

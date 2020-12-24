@@ -28,7 +28,7 @@ export const createCategory = (category) => {
     console.log(res);
     if (res.status === 201) {
       dispatch({ type: categoryTypes.ADD_NEW_CATEGORY_SUCCESS });
-      getAllCategory();
+      dispatch(getAllCategory());
     } else {
       dispatch({
         type: categoryTypes.ADD_NEW_CATEGORY_FAILURE,
@@ -45,7 +45,7 @@ export const updateCategory = (category) => {
     console.log(res);
     if (res.status === 201) {
       dispatch({ type: categoryTypes.UPDATE_CATEGORY_SUCCESS });
-      getAllCategory();
+      dispatch(getAllCategory());
     } else {
       dispatch({
         type: categoryTypes.UPDATE_CATEGORY_FAILURE,
@@ -61,7 +61,7 @@ export const deleteCategory = (id) => {
     const res = await axios.post('/category/delete', { id });
     if (res.status === 201) {
       dispatch({ type: categoryTypes.DELETE_CATEGORY_SUCCESS });
-      getAllCategory();
+      dispatch(getAllCategory());
     } else {
       dispatch({
         type: categoryTypes.DELETE_CATEGORY_FAILURE,

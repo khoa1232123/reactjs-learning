@@ -1,7 +1,6 @@
 export const convertCats = (categories, parentId = null) => {
   const categoryList = [];
   let cats;
-  console.log(parentId);
   if (parentId && parentId !== null) {
     cats = categories.filter((cat) => cat.parentId === parentId);
   } else {
@@ -10,7 +9,6 @@ export const convertCats = (categories, parentId = null) => {
     );
   }
   for (let cat of cats) {
-    console.log(cat);
     categoryList.push({
       _id: cat._id,
       name: cat.name,

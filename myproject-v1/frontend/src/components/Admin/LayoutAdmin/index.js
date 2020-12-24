@@ -14,8 +14,8 @@ const LayoutAdmin = ({ children }) => {
       dispatch(isUserLoggedIn());
     }
   });
-
   if (auth.user.role !== 'admin') {
+    console.log('abc');
     return <Redirect to={'/login'} />;
   }
 

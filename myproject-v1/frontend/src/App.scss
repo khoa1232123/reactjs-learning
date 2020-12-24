@@ -7,6 +7,10 @@ body {
   min-height: 100vh;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .App {
   min-height: 100vh;
   display: flex;

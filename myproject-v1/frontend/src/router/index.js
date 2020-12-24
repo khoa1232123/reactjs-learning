@@ -8,6 +8,7 @@ import {
   Dashboard,
   Home,
   Login,
+  ProductAdmin,
   ProductDetails,
   Shop,
 } from '../containers';
@@ -24,6 +25,7 @@ export default () => {
             <Switch>
               <Route path="/admin" exact component={Dashboard} />
               <Route path="/admin/categories" exact component={CategoryAdmin} />
+              <Route path="/admin/products" exact component={ProductAdmin} />
               <Route path="/admin/*" exact component={AdminEmpty} />
             </Switch>
           </LayoutAdmin>

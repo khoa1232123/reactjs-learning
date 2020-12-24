@@ -16,6 +16,9 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    priceSale: {
+      type: Number,
+    },
     quantity: {
       type: Number,
       required: true,
@@ -26,7 +29,7 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
     offer: { type: Number },
-    productPictures: [{ img: { type: String } }],
+    productPictures: { type: String },
     reviews: [
       {
         userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },

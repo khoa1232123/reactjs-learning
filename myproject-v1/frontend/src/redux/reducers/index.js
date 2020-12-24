@@ -4,8 +4,14 @@ import authReducers from './authReducers';
 import cartReducers from './cartReducers';
 // import userReducers from './userReducers';
 import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-// window.store.getState()
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['auth'],
+};
 
 const rootReducer = combineReducers({
   category: categoryReducers,
@@ -15,4 +21,4 @@ const rootReducer = combineReducers({
   // user: userReducers,
 });
 
-export default rootReducer;
+export default persistReducer(persistConfig, rootReducer);
