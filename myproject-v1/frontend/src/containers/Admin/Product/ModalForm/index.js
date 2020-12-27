@@ -3,15 +3,16 @@ import { Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertCats } from '../../../../helps/utils';
 import {
-  createCategory,
+  createProduct,
   getAllCategory,
   getProductById,
-  updateCategory,
+  updateProduct,
 } from '../../../../redux/actions';
 
 const ModalForm = ({ show, setShow, updateProductId = '' }) => {
   const category = useSelector((state) => state.category);
   const product = useSelector((state) => state.product);
+
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
@@ -31,6 +32,8 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
   useEffect(() => {
     if (updateProductId) {
       dispatch(getProductById(updateProductId));
+    } else {
+      setClear();
     }
   }, [dispatch, updateProductId]);
 
@@ -52,7 +55,17 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
       setProductCat(productDetails.category);
       setProductPictures(productDetails.productPictures);
     }
-  }, [product]);
+  }, [product.productDetails]);
+
+  const setClear = () => {
+    setName('');
+    setPrice(0);
+    setPriceSale(0);
+    setQuantity(0);
+    setDescription('');
+    setProductCat('');
+    setProductPictures('');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,17 +74,26 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
         _id: updateProductId,
         name,
         description,
+        price,
+        priceSale,
+        quantity,
+        category: productCat,
+        productPictures,
       };
-      dispatch(updateCategory(payload));
+      dispatch(updateProduct(payload));
     } else {
       const payload = {
         name,
         description,
+        price,
+        priceSale,
+        quantity,
+        category: productCat,
+        productPictures,
       };
-      dispatch(createCategory(payload));
+      dispatch(createProduct(payload));
     }
-    setName('');
-    setDescription('');
+    setClear();
     dispatch(getAllCategory());
     setShow(false);
   };
@@ -94,8 +116,7 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
   };
 
   const onClose = () => {
-    setName('');
-    setDescription('');
+    setClear();
     setShow(false);
   };
 
@@ -113,6 +134,7 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              required
             />
           </Form.Group>
           <div className="row">

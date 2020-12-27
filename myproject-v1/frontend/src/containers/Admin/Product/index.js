@@ -19,6 +19,11 @@ const Product = () => {
     setShow(true);
   };
 
+  const createProduct = () => {
+    setUpdateProductId('');
+    setShow(true);
+  };
+
   const renderProductList = () => {
     return (
       product.products &&
@@ -52,7 +57,7 @@ const Product = () => {
         <h1 className="h3 mb-0 text-gray-800">Product</h1>
         <button
           className="btn btn-primary btn-sm"
-          onClick={() => setShow(true)}
+          onClick={() => createProduct()}
         >
           Add Product
         </button>

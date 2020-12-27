@@ -6,6 +6,7 @@ const { populate } = require('../models/product');
 
 exports.createProduct = (req, res) => {
   // res.status(200).json({ file: req.files, body: req.body });
+  console.log(req.body);
   const {
     name,
     price,
@@ -51,7 +52,7 @@ exports.getAllProduct = (req, res) => {
       populate: { path: 'user' },
       select: '_id firstName',
     })
-    .select('_id name price priceSale category createdBy')
+    .select('_id name price priceSale category createdBy productPictures')
     .exec((error, products) => {
       if (error) return res.status(400).json({ error });
       if (products) {
@@ -71,5 +72,44 @@ exports.getProductDetailsById = (req, res) => {
     });
   } else {
     return res.status(400).json({ error: 'params required' });
+  }
+};
+
+exports.updateProduct = async (req, res) => {
+  console.log(req.body);
+  const {
+    _id,
+    name,
+    price,
+    priceSale,
+    quantity,
+    description,
+    productPictures,
+    category,
+  } = req.body;
+  const product = {
+    name,
+    slug: slugify(name),
+    price,
+    priceSale,
+    quantity,
+    description,
+    productPictures,
+    category,
+    createdBy: req.user._id,
+  };
+  const updatedProduct = await Product.findOneAndUpdate({ _id: _id }, product, {
+    new: true,
+  });
+  res.status(201).json({ updatedProduct });
+};
+
+exports.deleteProduct = async (req, res) => {
+  console.log(req.body);
+  const delProduct = await Category.findOneAndDelete({ _id: req.body.id });
+  if (delProduct) {
+    res.status(201).json({ message: 'Categories removed' });
+  } else {
+    res.status(400).json({ message: 'Something went wrong' });
   }
 };

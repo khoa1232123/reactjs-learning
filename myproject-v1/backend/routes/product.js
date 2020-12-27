@@ -6,6 +6,7 @@ const {
   getAllProduct,
   createProduct,
   getProductDetailsById,
+  updateProduct,
 } = require('../controller/product.js');
 const {
   adminMiddleware,
@@ -14,6 +15,7 @@ const {
 
 router.get('/getproducts', getAllProduct);
 router.post('/create', requireSignin, adminMiddleware, createProduct);
+router.post('/update', requireSignin, adminMiddleware, updateProduct);
 router.get('/getproduct/:productId', getProductDetailsById);
 
 module.exports = router;

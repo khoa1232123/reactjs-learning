@@ -23,17 +23,25 @@ const ProductDetails = (props) => {
     <>
       <Row className="mt-4">
         <Col xs={5}>
-          {productDetails.priceSale && <div className="onsale">Sale!</div>}
-          <img src={productDetails.image} alt="product" className="w-100" />
+          {productDetails.priceSale && productDetails.priceSale > 0 ? (
+            <div className="onsale">Sale!</div>
+          ) : (
+            ''
+          )}
+          <img
+            src={productDetails.productPictures}
+            alt="product"
+            className="w-100"
+          />
         </Col>
         <Col xs={7}>
           <h1>{productDetails.name}</h1>
-          {productDetails.priceSale ? (
+          {productDetails.priceSale && productDetails.priceSale > 0 ? (
             <h3 className="price">
-              <del>{productDetails.price}</del> - {productDetails.priceSale}
+              <del>{productDetails.price}$</del> - {productDetails.priceSale}$
             </h3>
           ) : (
-            <h3 className="price">{productDetails.price}</h3>
+            <h3 className="price">{productDetails.price}$</h3>
           )}
           <p>{productDetails.description}</p>
           <div className="action-addtocart d-flex">

@@ -1,4 +1,3 @@
-import data from '../../data';
 import axios from '../../helpers/axios';
 import { productTypes } from '../types';
 
@@ -13,10 +12,9 @@ export const getAllProduct = () => {
         payload: res.data.products,
       });
     } else {
-      const error = 'Error';
       dispatch({
         type: productTypes.GET_ALL_PRODUCT_FAILURE,
-        payload: error,
+        payload: res.data.error,
       });
     }
   };
@@ -35,10 +33,55 @@ export const getProductById = (productId) => {
         payload: res.data.product,
       });
     } else {
-      const error = 'Error';
       dispatch({
         type: productTypes.GET_PRODUCT_DETAILS_BY_ID_FAILURE,
-        payload: error,
+        payload: res.data.error,
+      });
+    }
+  };
+};
+
+export const createProduct = (product) => {
+  return async (dispatch, getState) => {
+    const { auth } = getState();
+    dispatch({ type: productTypes.CREATE_PRODUCT_REQUEST });
+    console.log({ product, auth });
+    const res = await axios.post('/product/create', product, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
+    if (res.status === 201) {
+      const message = 'Add product success';
+      dispatch({ type: productTypes.CREATE_PRODUCT_SUCCESS, payload: message });
+      dispatch(getAllProduct());
+    } else {
+      dispatch({
+        type: productTypes.CREATE_PRODUCT_FAILURE,
+        payload: res.data.error,
+      });
+    }
+  };
+};
+
+export const updateProduct = (product) => {
+  return async (dispatch, getState) => {
+    const { auth } = getState();
+    dispatch({ type: productTypes.UPDATE_PRODUCT_REQUEST });
+    const res = await axios.post('/product/update', product, {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    });
+    console.log(res);
+    if (res.status === 201) {
+      const message = 'Update product success';
+      dispatch({ type: productTypes.UPDATE_PRODUCT_SUCCESS, payload: message });
+      dispatch(getAllProduct());
+    } else {
+      dispatch({
+        type: productTypes.UPDATE_PRODUCT_FAILURE,
+        payload: res.data.error,
       });
     }
   };

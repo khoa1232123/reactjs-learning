@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   loading: false,
   productDetails: {},
+  message: null,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -43,6 +44,25 @@ export default (state = initialState, { type, payload }) => {
         productDetails: payload,
       };
     case productTypes.GET_PRODUCT_DETAILS_BY_ID_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    case productTypes.CREATE_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case productTypes.CREATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        message: payload,
+      };
+    case productTypes.CREATE_PRODUCT_FAILURE:
       return {
         ...state,
         loading: false,
