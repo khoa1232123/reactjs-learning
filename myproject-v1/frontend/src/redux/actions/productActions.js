@@ -1,19 +1,42 @@
 import axios from '../../helpers/axios';
 import { productTypes } from '../types';
 
-export const getAllProduct = () => {
+export const getAllProduct = (limit = 12, skip = 0) => {
   return async (dispatch) => {
     dispatch({ type: productTypes.GET_ALL_PRODUCT_REQUEST });
-    const res = await axios.get('/product/getproducts');
+    const res = await axios.get(
+      `/product/getproducts?limit=${limit}&skip=${skip}`
+    );
     console.log(res);
     if (res.status === 200) {
+      const { products, countAllProduct } = res.data;
       dispatch({
         type: productTypes.GET_ALL_PRODUCT_SUCCESS,
-        payload: res.data.products,
+        payload: { products, countAllProduct },
       });
     } else {
       dispatch({
         type: productTypes.GET_ALL_PRODUCT_FAILURE,
+        payload: res.data.error,
+      });
+    }
+  };
+};
+
+export const getProductByCat = (catId) => {
+  return async (dispatch) => {
+    console.log(catId);
+    dispatch({ type: productTypes.GET_PRODUCT_BY_CAT_REQUEST });
+    const res = await axios.get(`/product/getproductbycat/${catId}`);
+    console.log(res);
+    if (res.status === 200) {
+      dispatch({
+        type: productTypes.GET_PRODUCT_BY_CAT_SUCCESS,
+        payload: res.data.products,
+      });
+    } else {
+      dispatch({
+        type: productTypes.GET_PRODUCT_BY_CAT_FAILURE,
         payload: res.data.error,
       });
     }

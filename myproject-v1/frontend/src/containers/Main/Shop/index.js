@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import { ProductItem } from '../../../components';
+import { ProductItem, ThePagination } from '../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProduct } from '../../../redux/actions';
 import Sidebar from './Sidebar';
@@ -8,11 +8,15 @@ import Sidebar from './Sidebar';
 const Shop = () => {
   const product = useSelector((state) => state.product);
   const [numRow, setNumRow] = useState(3);
+  const limit = 12;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProduct());
-  }, [dispatch]);
+    dispatch(getAllProduct(limit));
+  }, [dispatch, limit]);
+
+  console.log(product.countAllProduct);
+
   return (
     <>
       <Row>
@@ -38,6 +42,7 @@ const Shop = () => {
                   <ProductItem product={product} />
                 </Col>
               ))}
+            <ThePagination count={product.countAllProduct} limit={limit} />
           </Row>
         </Col>
       </Row>

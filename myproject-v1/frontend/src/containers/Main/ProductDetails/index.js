@@ -58,6 +58,7 @@ const ProductDetails = (props) => {
               Add to Cart
             </Button>
           </div>
+          <p>{productDetails.category.name}</p>
         </Col>
       </Row>
     </>

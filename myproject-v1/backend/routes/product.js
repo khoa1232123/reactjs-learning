@@ -7,6 +7,7 @@ const {
   createProduct,
   getProductDetailsById,
   updateProduct,
+  getProductByCat,
 } = require('../controller/product.js');
 const {
   adminMiddleware,
@@ -14,6 +15,8 @@ const {
 } = require('../common-middleware/index.js');
 
 router.get('/getproducts', getAllProduct);
+router.get('/getproductbycat/:catId', getProductByCat);
+
 router.post('/create', requireSignin, adminMiddleware, createProduct);
 router.post('/update', requireSignin, adminMiddleware, updateProduct);
 router.get('/getproduct/:productId', getProductDetailsById);

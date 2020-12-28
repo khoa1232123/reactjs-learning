@@ -30,7 +30,7 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (updateProductId) {
+    if (updateProductId && updateProductId !== '') {
       dispatch(getProductById(updateProductId));
     } else {
       setClear();
@@ -69,7 +69,7 @@ const ModalForm = ({ show, setShow, updateProductId = '' }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (updateProductId) {
+    if (updateProductId && updateProductId !== '') {
       const payload = {
         _id: updateProductId,
         name,
