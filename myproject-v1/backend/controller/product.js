@@ -45,14 +45,25 @@ exports.createProduct = (req, res) => {
 };
 
 exports.getAllProduct = async (req, res) => {
-  const { skip, limit } = req.query;
+  const { skip, limit, sortField, category, search } = req.query;
   const skipQ = skip ? Number(skip) : 0;
   const limitQ = limit ? Number(limit) : 12;
+  const sortQ = sortField ? sortField : 'createdAt';
+  const findProduct = {};
+  if (search) {
+    findProduct.name = { $regex: new RegExp(search) };
+  }
+  if (category) {
+    findProduct.category = category;
+  }
+  console.log(findProduct);
+  // const findProduct = category ? { category: category } : {};
 
-  const countAllProduct = await Product.find({}).countDocuments({});
+  const countAllProduct = await Product.find(findProduct).countDocuments({});
   console.log(countAllProduct);
 
-  Product.find({})
+  await Product.find(findProduct)
+    .sort(sortQ)
     .populate({ path: 'category', select: '_id name' })
     .populate({
       path: 'createdBy',
@@ -60,7 +71,7 @@ exports.getAllProduct = async (req, res) => {
       select: '_id firstName',
     })
     .select('_id name price priceSale category createdBy productPictures')
-    .skip(skipQ)
+    .skip(skipQ * limitQ)
     .limit(limitQ)
     .exec((error, products) => {
       if (error) return res.status(400).json({ error });

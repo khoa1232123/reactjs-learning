@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Col, Pagination } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { getAllProduct } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSkipProduct } from '../../redux/actions';
 
-const ThePagination = ({ count, limit }) => {
-  const [skip, setSkip] = useState(0);
+const ThePagination = () => {
+  const toolProduct = useSelector((state) => state.toolProduct);
+  const { limit, skip } = toolProduct;
+  const product = useSelector((state) => state.product);
+  const { countAllProduct } = product;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllProduct(limit, skip * limit));
-  }, [dispatch, limit, skip]);
+  const setSkip = (num) => {
+    dispatch(setSkipProduct(num));
+  };
 
   let items = [];
-  const b = Math.ceil(Number(count) / Number(limit));
+  const b = Math.ceil(Number(countAllProduct) / Number(limit));
   for (let number = 0; number < b; number++) {
     items.push(
       <Pagination.Item
@@ -29,7 +32,7 @@ const ThePagination = ({ count, limit }) => {
 
   return (
     <Col xs={12}>
-      <Pagination>{items}</Pagination>
+      <Pagination className="justify-content-center">{items}</Pagination>
     </Col>
   );
 };

@@ -20,6 +20,7 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    autoIndex: false,
   })
   .then(() => {
     console.log('Database connected');

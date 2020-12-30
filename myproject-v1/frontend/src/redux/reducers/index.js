@@ -2,6 +2,7 @@ import categoryReducers from './categoryReducers';
 import productReducers from './productReducers';
 import authReducers from './authReducers';
 import cartReducers from './cartReducers';
+import toolProductReducers from './toolProductReducers';
 // import userReducers from './userReducers';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   product: productReducers,
   auth: authReducers,
   cart: cartReducers,
+  toolProduct: toolProductReducers,
   // user: userReducers,
 });
 

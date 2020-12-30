@@ -1,12 +1,21 @@
 import axios from '../../helpers/axios';
 import { productTypes } from '../types';
 
-export const getAllProduct = (limit = 12, skip = 0) => {
-  return async (dispatch) => {
+export const getAllProduct = () => {
+  return async (dispatch, getState) => {
+    const {
+      toolProduct: { limit, skip, sortField, category, search },
+    } = getState();
+    let url = `/product/getproducts?limit=${limit}&skip=${skip}&sortField=${sortField}`;
+    if (search) {
+      url = `${url}&search=${search}`;
+    }
+    if (category) {
+      // eslint-disable-next-line no-unused-vars
+      url = `${url}&category=${category}`;
+    }
     dispatch({ type: productTypes.GET_ALL_PRODUCT_REQUEST });
-    const res = await axios.get(
-      `/product/getproducts?limit=${limit}&skip=${skip}`
-    );
+    const res = await axios.get(url);
     console.log(res);
     if (res.status === 200) {
       const { products, countAllProduct } = res.data;

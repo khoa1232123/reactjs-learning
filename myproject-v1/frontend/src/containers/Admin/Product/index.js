@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProduct } from '../../../redux/actions';
+import { ThePagination } from '../../../components';
+import { getAllProduct, setDefaultProduct } from '../../../redux/actions';
 import ModalForm from './ModalForm';
 
 const Product = () => {
@@ -9,10 +10,11 @@ const Product = () => {
   const product = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(setDefaultProduct());
     dispatch(getAllProduct());
   }, [dispatch]);
-  console.log(product);
 
   const updateProduct = (id) => {
     setUpdateProductId(id);
@@ -91,6 +93,7 @@ const Product = () => {
               <tbody>{renderProductList()}</tbody>
             </table>
           </div>
+          <ThePagination />
         </div>
       </div>
 
