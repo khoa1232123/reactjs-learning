@@ -57,3 +57,31 @@ footer.footer {
   text-align: center;
 }
 // product details
+
+// mini-cart
+.mini-cart {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  span {
+    position: absolute;
+    font-size: 14px;
+    padding: 0px 5px;
+    top: -5px;
+    right: -5px;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #fff;
+    color: #333;
+  }
+}
+.tableCart {
+  .imgCart {
+    width: 100px;
+  }
+}

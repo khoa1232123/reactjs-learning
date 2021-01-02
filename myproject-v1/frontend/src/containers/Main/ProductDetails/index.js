@@ -16,7 +16,7 @@ const ProductDetails = (props) => {
   console.log(productDetails);
 
   const handleButton = () => {
-    addToCart(productDetails, numProduct);
+    dispatch(addToCart(productDetails, numProduct));
   };
 
   return (
@@ -54,11 +54,11 @@ const ProductDetails = (props) => {
                 onChange={(e) => setNumProduct(e.target.value)}
               />
             </div>
-            <Button size="lg" className="w-75" onClick={handleButton}>
+            <Button size="lg" className="w-75" onClick={() => handleButton()}>
               Add to Cart
             </Button>
           </div>
-          <p>{productDetails.category.name}</p>
+          <p>{productDetails.category && productDetails.category.name}</p>
         </Col>
       </Row>
     </>

@@ -4,6 +4,7 @@ import { Layout, LayoutAdmin } from '../components';
 import {
   Abouts,
   AdminEmpty,
+  Cart,
   CategoryAdmin,
   Dashboard,
   Home,
@@ -36,6 +37,7 @@ export default () => {
               <Route path="/" exact component={Home} />
               <Route path="/abouts" exact component={Abouts} />
               <Route path="/shop" exact component={Shop} />
+              <Route path="/cart" exact component={Cart} />
               <Route
                 path="/product/:productId"
                 exact

@@ -1,32 +1,53 @@
 import { cartTypes } from '../types';
 
 const initialState = {
-  cartItems: {},
+  cartItems: [],
   loading: false,
   error: null,
+  totalQty: 0,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = initialState, action) => {
-  switch (action.type) {
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
+    case cartTypes.GET_CART_PRODUCT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case cartTypes.GET_CART_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        cartItems: payload.cartItems,
+        totalQty: payload.totalQty,
+        loading: false,
+      };
+    case cartTypes.GET_CART_PRODUCT_FAILURE:
+      return {
+        ...state,
+        error: payload.error,
+        loading: false,
+      };
+
     case cartTypes.ADD_TO_CART_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case cartTypes.ADD_TO_CART_SUCCESS:
-      console.log('add to cart');
       return {
         ...state,
-        cartItems: action.payload.cartItems,
+        cartItems: payload.cartItems,
+        totalQty: payload.totalQty,
         loading: false,
       };
     case cartTypes.ADD_TO_CART_FAILURE:
       return {
         ...state,
-        error: action.payload.error,
+        error: payload.error,
         loading: false,
       };
+
     case cartTypes.RESET_CART:
       return {
         ...initialState,

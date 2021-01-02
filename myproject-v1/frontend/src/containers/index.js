@@ -3,6 +3,7 @@ export { default as Home } from './Main/Home';
 export { default as Abouts } from './Main/Abouts';
 export { default as Shop } from './Main/Shop';
 export { default as ProductDetails } from './Main/ProductDetails';
+export { default as Cart } from './Main/Cart';
 
 // Admin
 export { default as Dashboard } from './Admin/Dashboard';
