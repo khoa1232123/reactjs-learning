@@ -20,6 +20,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         cartItems: payload.cartItems,
         totalQty: payload.totalQty,
+        totalPrice: payload.totalPrice,
         loading: false,
       };
     case cartTypes.GET_CART_PRODUCT_FAILURE:
@@ -37,8 +38,6 @@ export default (state = initialState, { type, payload }) => {
     case cartTypes.ADD_TO_CART_SUCCESS:
       return {
         ...state,
-        cartItems: payload.cartItems,
-        totalQty: payload.totalQty,
         loading: false,
       };
     case cartTypes.ADD_TO_CART_FAILURE:
@@ -48,6 +47,22 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
       };
 
+    case cartTypes.REMOVE_CART_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case cartTypes.REMOVE_CART_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case cartTypes.REMOVE_CART_FAILURE:
+      return {
+        ...state,
+        error: payload.error,
+        loading: false,
+      };
     case cartTypes.RESET_CART:
       return {
         ...initialState,

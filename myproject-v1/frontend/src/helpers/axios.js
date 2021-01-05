@@ -2,14 +2,15 @@
 // import store from '../redux/store';
 // import { authTypes } from '../redux/types';
 import Axios from 'axios';
+import { getToken } from '../helps/localStorage';
 
-// const token = window.localStorage.getItem('token');
+const token = getToken();
 
 const axios = Axios.create({
   baseURL: 'http://localhost:5000/api',
-  // headers: {
-  //   Authorization: token ? `Bearer ${token}` : '',
-  // },
+  headers: {
+    Authorization: token ? `Bearer ${token}` : '',
+  },
 });
 
 // axios.interceptors.request.use((req) => {

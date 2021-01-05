@@ -11,6 +11,7 @@ const runUpdate = (condition, updateData) => {
 };
 
 exports.addToCart = (req, res) => {
+  console.log(req.body.cartItems);
   Cart.findOne({ user: req.user._id }).exec((error, cart) => {
     if (error) return res.status(400).json({ error });
     if (cart) {
@@ -72,8 +73,8 @@ exports.getCartItems = (req, res) => {
             _id: item.product._id.toString(),
             name: item.product.name,
             price: item.product.price,
-            img: item.product.productPictures[0].img,
-            qty: item.quantity,
+            productPictures: item.product.productPictures,
+            quantity: item.quantity,
           };
         });
       }

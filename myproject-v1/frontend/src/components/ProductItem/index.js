@@ -1,8 +1,15 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../../redux/actions';
 
 const ProductItem = ({ product }) => {
+  const dispatch = useDispatch();
+  const handleBtn = () => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <Card className="mb-3">
       {product.priceSale && product.priceSale > 0 ? (
@@ -25,7 +32,7 @@ const ProductItem = ({ product }) => {
           <Card.Text className="price">{product.price}$</Card.Text>
         )}
         <Card.Text>{product.rating}</Card.Text>
-        <Button variant="primary" size="sm">
+        <Button variant="primary" size="sm" onClick={() => handleBtn()}>
           Add to Cart
         </Button>
       </Card.Body>

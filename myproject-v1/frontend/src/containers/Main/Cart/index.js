@@ -1,19 +1,23 @@
 import React from 'react';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../../redux/actions';
+import { addToCart, removeCart } from '../../../redux/actions';
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const { cartItems } = cart;
+  const { cartItems, totalPrice, totalQty } = cart;
+
+  const handleRemoveCart = (product) => {
+    dispatch(removeCart(product._id));
+  };
   return (
     <Row>
       <Col xs={12}>
         <h1>Cart</h1>
       </Col>
       <Col xs={9}>
-        <Table striped bordered hover className="tableCart">
+        <Table bordered className="tableCart">
           <thead>
             <tr>
               <th>STT</th>
@@ -43,24 +47,72 @@ const Cart = () => {
                       />
                     </td>
                     <td>{name}</td>
-                    <td>${price}</td>
+                    <td>${price * quantity}</td>
                     <td>
-                      <Button onClick={() => dispatch(addToCart(product, -1))}>
-                        -
-                      </Button>
-                      <input type="number" value={quantity} />
-                      <Button onClick={() => dispatch(addToCart(product, 1))}>
-                        +
+                      <div className="d-flex justify-content-center">
+                        <Button
+                          onClick={() => dispatch(addToCart(product, -1))}
+                          className="mr-2"
+                        >
+                          -
+                        </Button>
+                        <input
+                          type="number"
+                          disabled
+                          min={1}
+                          max={product.quantity}
+                          value={quantity}
+                          onChange={() => {}}
+                          className="form-control w-25"
+                        />
+                        <Button
+                          onClick={() => dispatch(addToCart(product, 1))}
+                          className="ml-2"
+                        >
+                          +
+                        </Button>
+                      </div>
+                    </td>
+                    <td>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRemoveCart(product)}
+                      >
+                        X
                       </Button>
                     </td>
-                    <td>@mdo</td>
                   </tr>
                 );
               })}
           </tbody>
         </Table>
       </Col>
-      <Col xs={3}></Col>
+      <Col xs={3}>
+        <Table bordered>
+          <tbody>
+            <tr>
+              <th>Subtotal:</th>
+              <th>${totalPrice}</th>
+            </tr>
+            <tr>
+              <th>Shipping:</th>
+              <th>${totalQty > 5 ? 0 : 15}</th>
+            </tr>
+            {totalQty <= 5 && (
+              <tr>
+                <td colSpan={2}>Buy more than 5 products to ship</td>
+              </tr>
+            )}
+            <tr>
+              <th>Total:</th>
+              <th>${totalQty > 5 ? totalPrice : totalPrice + 15}</th>
+            </tr>
+          </tbody>
+        </Table>
+        <Button variant="primary" className="w-100">
+          Process
+        </Button>
+      </Col>
     </Row>
   );
 };

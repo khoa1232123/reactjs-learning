@@ -8,6 +8,7 @@ const cors = require('cors');
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
 const authRoutes = require('./routes/auth');
+const cartRoutes = require('./routes/cart');
 
 // environment variable or you can say constants
 env.config();
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use('/api/product', productRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/cart', cartRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
