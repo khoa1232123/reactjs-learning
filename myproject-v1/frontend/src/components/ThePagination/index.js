@@ -28,8 +28,6 @@ const ThePagination = () => {
     );
   }
 
-  console.log(skip);
-
   return (
     <Col xs={12}>
       <Pagination className="justify-content-center">{items}</Pagination>

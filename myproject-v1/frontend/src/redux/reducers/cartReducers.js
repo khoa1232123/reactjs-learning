@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   error: null,
   totalQty: 0,
+  totalPrice: 0,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

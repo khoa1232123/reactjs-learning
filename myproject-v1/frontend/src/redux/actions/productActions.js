@@ -16,7 +16,6 @@ export const getAllProduct = () => {
     }
     dispatch({ type: productTypes.GET_ALL_PRODUCT_REQUEST });
     const res = await axios.get(url);
-    console.log(res);
     if (res.status === 200) {
       const { products, countAllProduct } = res.data;
       dispatch({
@@ -34,7 +33,6 @@ export const getAllProduct = () => {
 
 export const getProductByCat = (catId) => {
   return async (dispatch) => {
-    console.log(catId);
     dispatch({ type: productTypes.GET_PRODUCT_BY_CAT_REQUEST });
     const res = await axios.get(`/product/getproductbycat/${catId}`);
     console.log(res);
@@ -58,7 +56,6 @@ export const getProductById = (productId) => {
       type: productTypes.GET_PRODUCT_DETAILS_BY_ID_REQUEST,
     });
     const res = await axios.get(`/product/getproduct/${productId}`);
-    console.log(res);
     if (res.status === 200) {
       dispatch({
         type: productTypes.GET_PRODUCT_DETAILS_BY_ID_SUCCESS,

@@ -7,7 +7,8 @@ import { getCartProduct } from '../../../redux/actions';
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  const { totalQty } = cart;
+  const { totalQty, totalPrice } = cart;
+  console.log(cart);
   useEffect(() => {
     dispatch(getCartProduct());
   }, [dispatch]);

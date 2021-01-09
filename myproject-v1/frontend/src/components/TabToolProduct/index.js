@@ -5,7 +5,6 @@ import { setSortFieldProduct } from '../../redux/actions';
 
 const TabToolProduct = ({ numRow, setNumRow }) => {
   const toolProduct = useSelector((state) => state.toolProduct);
-  console.log(toolProduct);
   const dispatch = useDispatch();
 
   const [sort, setSort] = useState('');

@@ -11,7 +11,6 @@ const runUpdate = (condition, updateData) => {
 };
 
 exports.addToCart = (req, res) => {
-  console.log(req.body.cartItems);
   Cart.findOne({ user: req.user._id }).exec((error, cart) => {
     if (error) return res.status(400).json({ error });
     if (cart) {
@@ -23,7 +22,6 @@ exports.addToCart = (req, res) => {
 
         const item = cart.cartItems.find((c) => c.product == product);
         let condition, update;
-
         if (item) {
           condition = { user: req.user._id, 'cartItems.product': product };
           update = {
@@ -34,7 +32,9 @@ exports.addToCart = (req, res) => {
         } else {
           condition = { user: req.user._id };
           update = {
-            $push: cartItem,
+            $push: {
+              cartItems: cartItem,
+            },
           };
         }
         promiseArray.push(runUpdate(condition, update));
@@ -66,18 +66,7 @@ exports.getCartItems = (req, res) => {
     .exec((error, cart) => {
       if (error) return res.status(400).json({ error });
 
-      let cartItems = {};
-      if (cart) {
-        cart.cartItems.forEach((item, index) => {
-          cartItems[item.product._id.toString()] = {
-            _id: item.product._id.toString(),
-            name: item.product.name,
-            price: item.product.price,
-            productPictures: item.product.productPictures,
-            quantity: item.quantity,
-          };
-        });
-      }
+      let cartItems = cart ? cart.cartItems : [];
       res.status(200).json({ cartItems });
     });
 };

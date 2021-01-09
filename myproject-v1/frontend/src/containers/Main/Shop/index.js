@@ -9,8 +9,6 @@ import TabToolProduct from '../../../components/TabToolProduct';
 const Shop = () => {
   const product = useSelector((state) => state.product);
   const toolProduct = useSelector((state) => state.toolProduct);
-  // const { sortField } = toolProduct;
-  console.log(toolProduct);
   const [numRow, setNumRow] = useState(3);
   const limit = 12;
   const dispatch = useDispatch();
