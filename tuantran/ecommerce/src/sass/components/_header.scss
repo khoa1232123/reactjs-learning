@@ -1,0 +1,70 @@
+.header {
+  background-color: var(--main-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  height: var(--header-height);
+
+  .container {
+    height: 100%;
+  }
+
+  &__logo {
+    @include flex(center, center);
+    position: absolute;
+    inset: 0;
+    height: var(--header-height);
+    pointer-events: none;
+
+    img {
+      height: 28px;
+    }
+  }
+
+  &__menu {
+    @include flex(center, space-between);
+    height: 100%;
+    font-size: 1.5rem;
+
+    &__mobile--toggle {
+      display: none;
+    }
+
+    &__item ~ &__item {
+      margin-left: 40px;
+    }
+
+    &__item.active {
+      font-weight: 600;
+      color: var(--main-color);
+    }
+
+    &__item:hover {
+      color: var(--main-color);
+    }
+
+    &__left,
+    &__right {
+      @include flex(center, center);
+      height: 100%;
+    }
+
+    &__left {
+      &__close {
+        display: none;
+      }
+    }
+
+    &__right {
+      font-size: 2.25rem;
+      &__item {
+        @include flex(center, center);
+      }
+      @include tablet {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

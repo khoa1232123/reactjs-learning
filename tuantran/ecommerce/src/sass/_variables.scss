@@ -1,0 +1,29 @@
+:root {
+  --main-bg: #fff;
+  --main-color: #4267b2;
+
+  --txt-main-color: #222;
+  --txt-second-color: #8d8d8d;
+  --txt-white-color: #fff;
+
+  --btn-main-bg: var(--main-bg);
+  --btn-main-color: #fff;
+
+  --blue-color: #4267b2;
+  --orange-color: #fbb96b;
+  --pink-color: #fe7e73;
+  --white-color: #fff;
+  --black-color: #000;
+
+  --header-height: 170px;
+  --header-tablet-height: 70px;
+  --header-mobile-height: 40px;
+  --header-shrink-height: 40px;
+
+  --box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  --mobile-width: 600px;
+  --tablet-width: 1024px;
+}
+
+$numbers: (1, 2, 3, 4, 5, 6, 7, 8);
